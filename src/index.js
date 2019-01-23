@@ -1,7 +1,9 @@
+import 'bulma/css/bulma.min.css'
 import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import * as d3 from 'd3'
+import { wam } from './wam'
 
 class DoseRateEditor extends React.Component {
   constructor () {
@@ -53,10 +55,11 @@ class DoseRateEditor extends React.Component {
         <g>
           {
             xs.map((x, i) => {
-              return <g>
+              return <g key={i}>
                 {
                   ys.map((y, j) => {
                     return <rect
+                      key={j}
                       x={width * i / xStep}
                       y={height * (yStep - j - 1) / yStep}
                       width={width / xStep}
@@ -162,20 +165,6 @@ class MutatonChart extends React.Component {
       </g>
     </svg>
   }
-}
-
-const wam = (size, d) => {
-  const a0 = 3.2e-8
-  const a1 = 3.0e-5
-  const b0 = 3.0e-3
-  const b1 = 1.4e-1
-  const Ft = new Array(size)
-  Ft[0] = a0 / b0
-  for (let i = 1; i < size; ++i) {
-    const dFt = (a0 + a1 * d[i]) - (b0 + b1 * d[i]) * Ft[i - 1]
-    Ft[i] = Ft[i - 1] + dFt
-  }
-  return Ft
 }
 
 class C2 extends React.Component {
@@ -367,11 +356,16 @@ const Index = () => {
 }
 
 const App = () => {
-  return <Router>
-    <div>
-      <Route path='/' component={Index} exact />
-    </div>
-  </Router>
+  return <div>
+    <section className='section'>
+      <div className='container'>
+        <h1 className='title'>WAM Simulator</h1>
+        <Router>
+          <Route path='/' component={Index} exact />
+        </Router>
+      </div>
+    </section>
+  </div>
 }
 
 render(<App />, document.getElementById('content'))
