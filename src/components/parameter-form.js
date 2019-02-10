@@ -1,12 +1,43 @@
 import React from 'react'
+import { presets } from '../preset'
 
 export const ParameterForm = (props) => {
   const { wamParams, onChange } = props
   const { F0, a0, a1, b0, b1 } = wamParams
 
   return <form onSubmit={(event) => event.preventDefault()}>
+
     <div className='field is-horizontal'>
-      <div className='field-label'>
+      <div className='field-label is-normal'>
+        <label className='label'>Preset</label>
+      </div>
+      <div className='field-body'>
+        <div className='field has-addons'>
+          <div className='control is-expanded'>
+            <div className='select is-fullwidth'>
+              <select>
+                {
+                  presets.map(({ name }) => {
+                    return <option value={name}>{name}</option>
+                  })
+                }
+              </select>
+            </div>
+          </div>
+          <div className='control'>
+            <button
+              className='button'
+              onClick={() => {
+              }}
+            >
+              Load
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className='field is-horizontal'>
+      <div className='field-label is-normal'>
         <label className='label'>a<sub>0</sub></label>
       </div>
       <div className='field-body'>
@@ -25,7 +56,7 @@ export const ParameterForm = (props) => {
       </div>
     </div>
     <div className='field is-horizontal'>
-      <div className='field-label'>
+      <div className='field-label is-normal'>
         <label className='label'>a<sub>1</sub></label>
       </div>
       <div className='field-body'>
@@ -44,7 +75,7 @@ export const ParameterForm = (props) => {
       </div>
     </div>
     <div className='field is-horizontal'>
-      <div className='field-label'>
+      <div className='field-label is-normal'>
         <label className='label'>b<sub>0</sub></label>
       </div>
       <div className='field-body'>
@@ -63,7 +94,7 @@ export const ParameterForm = (props) => {
       </div>
     </div>
     <div className='field is-horizontal'>
-      <div className='field-label'>
+      <div className='field-label is-normal'>
         <label className='label'>b<sub>1</sub></label>
       </div>
       <div className='field-body'>
@@ -82,7 +113,7 @@ export const ParameterForm = (props) => {
       </div>
     </div>
     <div className='field is-horizontal'>
-      <div className='field-label'>
+      <div className='field-label is-normal'>
         <label className='label'>F<sub>0</sub></label>
       </div>
       <div className='field-body'>
