@@ -1,12 +1,16 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import {
+  updateParams
+} from '../actions'
 import { presets } from '../preset'
 
-export const ParameterForm = (props) => {
-  const { wamParams, onChange } = props
+const ParameterForm = (props) => {
+  const { wamParams, dispatch } = props
   const { F0, a0, a1, b0, b1 } = wamParams
+  const presetRef = React.createRef()
 
   return <form onSubmit={(event) => event.preventDefault()}>
-
     <div className='field is-horizontal'>
       <div className='field-label is-normal'>
         <label className='label'>Preset</label>
@@ -15,10 +19,10 @@ export const ParameterForm = (props) => {
         <div className='field has-addons'>
           <div className='control is-expanded'>
             <div className='select is-fullwidth'>
-              <select>
+              <select ref={presetRef}>
                 {
                   presets.map(({ name }) => {
-                    return <option value={name}>{name}</option>
+                    return <option key={name} value={name}>{name}</option>
                   })
                 }
               </select>
@@ -28,6 +32,8 @@ export const ParameterForm = (props) => {
             <button
               className='button'
               onClick={() => {
+                const preset = presets.find(({ name }) => name === presetRef.current.value)
+                dispatch(updateParams(preset.value))
               }}
             >
               Load
@@ -48,8 +54,10 @@ export const ParameterForm = (props) => {
               type='number'
               min='0'
               step='1e-9'
-              defaultValue={a0}
-              onChange={(event) => onChange({ a0: +event.target.value })}
+              value={a0}
+              onChange={(event) => {
+                dispatch(updateParams({ a0: +event.target.value }))
+              }}
             />
           </div>
         </div>
@@ -67,8 +75,10 @@ export const ParameterForm = (props) => {
               type='number'
               min='0'
               step='1e-6'
-              defaultValue={a1}
-              onChange={(event) => onChange({ a1: +event.target.value })}
+              value={a1}
+              onChange={(event) => {
+                dispatch(updateParams({ a1: +event.target.value }))
+              }}
             />
           </div>
         </div>
@@ -86,8 +96,10 @@ export const ParameterForm = (props) => {
               type='number'
               min='1e-4'
               step='1e-4'
-              defaultValue={b0}
-              onChange={(event) => onChange({ b0: +event.target.value })}
+              value={b0}
+              onChange={(event) => {
+                dispatch(updateParams({ b0: +event.target.value }))
+              }}
             />
           </div>
         </div>
@@ -105,8 +117,10 @@ export const ParameterForm = (props) => {
               type='number'
               min='0'
               step='1e-2'
-              defaultValue={b1}
-              onChange={(event) => onChange({ b1: +event.target.value })}
+              value={b1}
+              onChange={(event) => {
+                dispatch(updateParams({ b1: +event.target.value }))
+              }}
             />
           </div>
         </div>
@@ -124,8 +138,10 @@ export const ParameterForm = (props) => {
               type='number'
               min='0'
               step='1e-5'
-              defaultValue={F0}
-              onChange={(event) => onChange({ F0: +event.target.value })}
+              value={F0}
+              onChange={(event) => {
+                dispatch(updateParams({ F0: +event.target.value }))
+              }}
             />
           </div>
         </div>
@@ -133,3 +149,5 @@ export const ParameterForm = (props) => {
     </div>
   </form>
 }
+
+export default connect()(ParameterForm)
