@@ -2,7 +2,7 @@ import React from 'react'
 
 export const ParameterForm = (props) => {
   const { wamParams, onChange } = props
-  const { a0, a1, b0, b1 } = wamParams
+  const { F0, a0, a1, b0, b1 } = wamParams
 
   return <form onSubmit={(event) => event.preventDefault()}>
     <div className='field is-horizontal'>
@@ -76,6 +76,25 @@ export const ParameterForm = (props) => {
               step='1e-2'
               defaultValue={b1}
               onChange={(event) => onChange({ b1: +event.target.value })}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className='field is-horizontal'>
+      <div className='field-label'>
+        <label className='label'>F<sub>0</sub></label>
+      </div>
+      <div className='field-body'>
+        <div className='field'>
+          <div className='control'>
+            <input
+              className='input'
+              type='number'
+              min='0'
+              step='1e-5'
+              defaultValue={F0}
+              onChange={(event) => onChange({ F0: +event.target.value })}
             />
           </div>
         </div>

@@ -17,6 +17,7 @@ class Index extends React.Component {
     this.state = {
       d: line,
       wamParams: {
+        F0: 1e-5,
         a0: 3.2e-8,
         a1: 3.0e-5,
         b0: 3.0e-3,
