@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { SVGConverter } from 'svg-dataurl'
 import { addLine } from '../actions'
 import MutationChart from './mutation-chart'
 
@@ -10,11 +11,13 @@ const MutationFrequencyPanel = (props) => {
     xMax,
     yMax
   } = props
+  const svgRef = React.createRef()
   return <div className='panel'>
     <p className='panel-heading'>Mutation Frequency</p>
     <div className='panel-block'>
       <div className='control'>
         <MutationChart
+          svgRef={svgRef}
           lines={lines}
           width={800}
           height={300}
@@ -40,7 +43,7 @@ const MutationFrequencyPanel = (props) => {
               Add Line
             </button>
           </div>
-          <div className='control'>
+          <div className='control is-hidden-touch'>
             <a
               className='button'
               onClick={(event) => {
@@ -60,7 +63,43 @@ const MutationFrequencyPanel = (props) => {
                 a.download = 'data.csv'
               }}
             >
-              export
+              export CSV
+            </a>
+          </div>
+          <div className='control is-hidden-touch'>
+            <a
+              className='button'
+              onClick={() => {
+                SVGConverter
+                  .loadFromElement(svgRef.current)
+                  .then((converter) => {
+                    const dataUrl = converter.svgDataURL()
+                    const a = document.getElementById('download')
+                    a.href = dataUrl
+                    a.download = 'chart.svg'
+                    a.click()
+                  })
+              }}
+            >
+              export SVG
+            </a>
+          </div>
+          <div className='control is-hidden-touch'>
+            <a
+              className='button'
+              onClick={() => {
+                SVGConverter
+                  .loadFromElement(svgRef.current)
+                  .then((converter) => {
+                    const dataUrl = converter.pngDataURL()
+                    const a = document.getElementById('download')
+                    a.href = dataUrl
+                    a.download = 'chart.png'
+                    a.click()
+                  })
+              }}
+            >
+              export PNG
             </a>
           </div>
         </div>

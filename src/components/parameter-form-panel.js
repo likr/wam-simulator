@@ -93,7 +93,7 @@ const ParameterFormPanel = (props) => {
           </div>
           <div className='field is-horizontal'>
             <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-              <label className='label'>D<sub>max</sub></label>
+              <label className='label'>d<sub>max</sub></label>
             </div>
             <div className='field-body'>
               <div className='field'>
@@ -103,6 +103,7 @@ const ParameterFormPanel = (props) => {
                     className='input'
                     type='number'
                     min='0'
+                    max='10'
                     step='0.1'
                     defaultValue={doseMax}
                   />

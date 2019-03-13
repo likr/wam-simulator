@@ -12,7 +12,8 @@
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
-    "redux-starter-kit": "^0.4.3"
+    "redux-starter-kit": "^0.4.3",
+    "svg-dataurl": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

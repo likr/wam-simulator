@@ -3,6 +3,7 @@ import * as d3 from 'd3'
 
 const MutationChart = (props) => {
   const {
+    svgRef,
     lines,
     width,
     height,
@@ -22,7 +23,11 @@ const MutationChart = (props) => {
     .range([height, 0])
 
   return <div className='svg-box' style={{ paddingTop: `${100 * (height + topMargin + bottomMargin) / (width + leftMargin + rightMargin)}%` }}>
-    <svg className='svg-box-content' viewBox={`0, 0, ${width + leftMargin + rightMargin} ${height + topMargin + bottomMargin}`}>
+    <svg
+      ref={svgRef}
+      className='svg-box-content'
+      viewBox={`0, 0, ${width + leftMargin + rightMargin} ${height + topMargin + bottomMargin}`}
+    >
       <g transform={`translate(${leftMargin},${topMargin})`}>
         <g>
           {
