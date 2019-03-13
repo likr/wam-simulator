@@ -35,7 +35,7 @@ const MutationFrequencyPanel = (props) => {
         <div className='field is-grouped'>
           <div className='control'>
             <button
-              className='button is-primary'
+              className='button is-link'
               onClick={() => {
                 dispatch(addLine())
               }}

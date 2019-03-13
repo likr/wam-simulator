@@ -43,6 +43,7 @@ const ParameterFormPanel = (props) => {
                   <input
                     ref={timeMaxRef}
                     className='input'
+                    aria-label='t_r'
                     type='number'
                     min='0'
                     step='1'
@@ -62,6 +63,7 @@ const ParameterFormPanel = (props) => {
                   <input
                     ref={timeGroupsRef}
                     className='input'
+                    aria-label='n'
                     type='number'
                     min='1'
                     step='1'
@@ -81,6 +83,7 @@ const ParameterFormPanel = (props) => {
                   <input
                     ref={mutationFrequencyMaxRef}
                     className='input'
+                    aria-label='F_max'
                     type='number'
                     min='0'
                     max='0.001'
@@ -101,6 +104,7 @@ const ParameterFormPanel = (props) => {
                   <input
                     ref={doseMaxRef}
                     className='input'
+                    aria-label='d_max'
                     type='number'
                     min='0'
                     max='10'

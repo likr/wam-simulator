@@ -1,21 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="Description" content="Web-based simulator of Whack-a-Mole (WAM) model to describe the biological effects of radiation exposure">
+<meta property="og:url" content="https://wamsim.vdslab.jp/">
+<meta property="og:type" content="website" />
+<meta property="og:title" content="WAM Simulator"/>
+<meta property="og:description" content="Web-based simulator of Whack-a-Mole (WAM) model to describe the biological effects of radiation exposure">
+<meta property="og:site_name" content="WAM Simulator">
+<meta property="og:image" content="./images/ogp.png">
 <title>WAM Simulator</title>
+<link rel="apple-touch-icon" sizes="180x180" href="./images/icons/icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="./images/icons/icon-192x192.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#0000ff">
 <style>
 .svg-box {
-    width: 100%;
-    height: 0;
-    position: relative;
-    padding-top: 60%;
+  width: 100%;
+  height: 0;
+  position: relative;
+  padding-top: 60%;
 }
 
 .svg-box-content {
-    position: absolute;
-    top: 0;
-    left: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 svg text {
   -webkit-user-select: none;
@@ -33,24 +44,24 @@ svg text::selection {
 </head>
 <body>
   <div>
-    <nav class='navbar is-link'>
-      <div class='container'>
-        <div class='navbar-brand'>
-          <a class='navbar-item'>
+    <nav class="navbar is-link">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item">
             <h1>WAM Simulator</h1>
           </a>
         </div>
       </div>
     </nav>
-    <section class='section'>
-      <div class='container'>
+    <section class="section">
+      <div class="container">
         <div id="content">
           <progress class="progress" max="100" />
         </div>
       </div>
     </section>
-    <section class='section'>
-      <div class='container'>
+    <section class="section">
+      <div class="container">
         <div class="content">
           <h3>About this page</h3>
           <p>TBD</p>
@@ -63,7 +74,7 @@ svg text::selection {
       </div>
     </footer>
   </div>
-  <a id='download' />
+  <a id="download" />
   <script src="./index.js"></script>
 </body>
 </html>

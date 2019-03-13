@@ -8,6 +8,11 @@ import { Provider } from 'react-redux'
 import { reducer } from './reducer'
 import Root from './components/root'
 
+if ('serviceWorker' in navigator) {
+  const swName = '/sw.js'
+  navigator.serviceWorker.register(swName)
+}
+
 const store = createStore(reducer)
 
 const App = () => {
