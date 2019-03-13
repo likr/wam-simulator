@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "bulma": "^0.7.4",
-    "d3": "^5.7.0",
+    "bulma-slider": "^2.0.0",
+    "d3": "^5.9.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",

@@ -1,71 +1,47 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import DoseRateEditor from './dose-rate-editor'
-import MutatonChart from './mutation-chart'
-import ParameterForm from './parameter-form'
+import LineEditorPanel from './line-editor-panel'
+import MutationFrequencyPanel from './mutation-frequency-panel'
+import ParameterFormPanel from './parameter-form-panel'
 
 const Root = (props) => {
   const {
-    size,
-    d,
-    dInput,
-    wamParams
+    lines,
+    timeMax,
+    timeGroups,
+    mutationFrequencyMax,
+    doseMax
   } = props
-  const width = 800
-  const height = 500
-  const leftMargin = 100
-  const rightMargin = 100
-  const bottomMargin = 80
-  const topMargin = 20
-  const maxValue = 2e-4
-  return <div className='columns'>
-    <div className='column is-one-third'>
-      <h3 className='title'>Parameters</h3>
-      <ParameterForm
-        wamParams={wamParams}
-      />
+  return <div>
+    <div className='columns'>
+      <div className='column is-one-third'>
+        <ParameterFormPanel params={props} />
+      </div>
+      <div className='column'>
+        <MutationFrequencyPanel
+          lines={lines}
+          xMax={timeMax}
+          yMax={mutationFrequencyMax}
+        />
+      </div>
     </div>
-    <div className='column'>
-      <h3 className='title'>Dose</h3>
-      <DoseRateEditor
-        d={dInput}
-        width={width}
-        height={height}
-        leftMargin={leftMargin}
-        rightMargin={rightMargin}
-        topMargin={topMargin}
-        bottomMargin={bottomMargin}
-        xMax={size}
-        yMax={0.1}
-      />
-      <h3 className='title'>Mutation frequency</h3>
-      <MutatonChart
-        width={width}
-        height={height}
-        leftMargin={leftMargin}
-        rightMargin={rightMargin}
-        topMargin={topMargin}
-        bottomMargin={bottomMargin}
-        xMax={size}
-        yMax={maxValue}
-        d={d}
-        wamParams={wamParams}
-      />
+    <div className='columns is-multiline'>
+      {
+        lines.map((line, i) => {
+          return <div className='column is-half' key={i}>
+            <LineEditorPanel
+              lineIndex={i}
+              line={line}
+              timeMax={timeMax}
+              doseMax={doseMax}
+              mutationFrequencyMax={mutationFrequencyMax}
+              timeStep={timeGroups}
+            />
+          </div>
+        })
+      }
     </div>
   </div>
 }
 
-export default connect(
-  (state) => {
-    const { size, dInput } = state
-    const yMax = 0.1
-    const d = new Array(size)
-    for (let i = 0; i < size; ++i) {
-      const index = Math.floor(i * dInput.length / size)
-      d[i] = (dInput[index] / 10) * yMax
-    }
-    return Object.assign({}, state, {
-      d
-    })
-  }
-)(Root)
+export default connect((state) => state)(Root)

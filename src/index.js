@@ -1,4 +1,5 @@
 import 'bulma/css/bulma.min.css'
+import 'bulma-slider/dist/css/bulma-slider.min.css'
 import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -11,24 +12,9 @@ const store = createStore(reducer)
 
 const App = () => {
   return <Provider store={store}>
-    <div>
-      <nav className='navbar'>
-        <div className='container'>
-          <div className='navbar-brand'>
-            <a className='navbar-item'>
-              <h1>WAM Simulator</h1>
-            </a>
-          </div>
-        </div>
-      </nav>
-      <section className='section'>
-        <div className='container'>
-          <Router>
-            <Route path='/' component={Root} exact />
-          </Router>
-        </div>
-      </section>
-    </div>
+    <Router>
+      <Route path='/' component={Root} exact />
+    </Router>
   </Provider>
 }
 

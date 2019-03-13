@@ -2,14 +2,14 @@
 <html>
 <head>
 <meta charset="utf-8"/>
-<meta name-"viewport" content="width-device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WAM Simulator</title>
 <style>
 .svg-box {
     width: 100%;
     height: 0;
-    padding-top: 60%;
     position: relative;
+    padding-top: 60%;
 }
 
 .svg-box-content {
@@ -29,7 +29,37 @@ svg text::selection {
 </style>
 </head>
 <body>
-  <div id="content">loading</div>
+  <div>
+    <nav class='navbar is-link'>
+      <div class='container'>
+        <div class='navbar-brand'>
+          <a class='navbar-item'>
+            <h1>WAM Simulator</h1>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <section class='section'>
+      <div class='container'>
+        <div id="content">
+          <progress class="progress" max="100" />
+        </div>
+      </div>
+    </section>
+    <section class='section'>
+      <div class='container'>
+        <div class="content">
+          <h3>About this page</h3>
+          <p>TBD</p>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>powered by WAM Team</p>
+      </div>
+    </footer>
+  </div>
   <script src="./index.js"></script>
 </body>
 </html>
