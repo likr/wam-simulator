@@ -54,7 +54,7 @@ const LineEditorPanel = (props) => {
           height={200}
           topMargin={20}
           bottomMargin={50}
-          leftMargin={100}
+          leftMargin={110}
           rightMargin={20}
           xMax={timeMax}
           yMax={mutationFrequencyMax}
@@ -67,7 +67,7 @@ const LineEditorPanel = (props) => {
           height={200}
           topMargin={20}
           bottomMargin={50}
-          leftMargin={100}
+          leftMargin={110}
           rightMargin={20}
           xMax={timeMax}
           yMax={doseMax}
