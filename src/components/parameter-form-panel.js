@@ -46,7 +46,7 @@ const ParameterFormPanel = (props) => {
                 defaultValue={timeMax}
               />
             </div>
-            <p className='help'>Maximum value of horizontal axis (time)</p>
+            <p className='help'>Maximum value of horizontal axis (time (hour))</p>
           </div>
           <div className='field'>
             <label className='label'>t<sub>div</sub></label>
@@ -93,7 +93,7 @@ const ParameterFormPanel = (props) => {
                 defaultValue={doseMax}
               />
             </div>
-            <p className='help'>Maximum value of vertical axis (dose rate)</p>
+            <p className='help'>Maximum value of vertical axis (dose rate (Gy/hour))</p>
           </div>
         </div>
       </div>

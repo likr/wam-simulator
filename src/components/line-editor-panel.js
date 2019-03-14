@@ -28,7 +28,7 @@ const LineEditorPanel = (props) => {
   const { F0, a0, a1, b0, b1 } = params
 
   return <div className='panel'>
-    <p className='panel-heading'>Line {lineIndex + 1} (D = {d.reduce((a, v) => a + v).toFixed(3)})</p>
+    <p className='panel-heading'>Line {lineIndex + 1} (D = {d.reduce((a, v) => a + v).toFixed(3)}Gy)</p>
     <div className='panel-block'>
       <div className='control'>
         <label className='label'>Color</label>
