@@ -103,6 +103,7 @@ const DoseChart = (props) => {
               </g>
             })
           }
+          <text transform={`translate(-90,${height / 2})rotate(-90)`} textAnchor='middle'>Dose rate (Gy / hour)</text>
         </g>
         <g>
           <line x1={xScale(0)} y1={yScale(0)} x2={xScale(xMax)} y2={yScale(0)} stroke='#000' />
@@ -114,6 +115,7 @@ const DoseChart = (props) => {
               </g>
             })
           }
+          <text transform={`translate(${width / 2},${height + 40})`} textAnchor='middle'>Time (hour)</text>
         </g>
       </g>
     </svg>

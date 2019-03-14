@@ -33,87 +33,67 @@ const ParameterFormPanel = (props) => {
       <p className='panel-heading'>Parameters</p>
       <div className='panel-block'>
         <div className='control'>
-          <div className='field is-horizontal'>
-            <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-              <label className='label'>t<sub>r</sub></label>
+          <div className='field'>
+            <label className='label'>t<sub>max</sub></label>
+            <div className='control'>
+              <input
+                ref={timeMaxRef}
+                className='input'
+                aria-label='t_r'
+                type='number'
+                min='0'
+                step='1'
+                defaultValue={timeMax}
+              />
             </div>
-            <div className='field-body'>
-              <div className='field'>
-                <div className='control'>
-                  <input
-                    ref={timeMaxRef}
-                    className='input'
-                    aria-label='t_r'
-                    type='number'
-                    min='0'
-                    step='1'
-                    defaultValue={timeMax}
-                  />
-                </div>
-              </div>
-            </div>
+            <p className='help'>Maximum value of horizontal axis (time)</p>
           </div>
-          <div className='field is-horizontal'>
-            <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-              <label className='label'>n</label>
+          <div className='field'>
+            <label className='label'>t<sub>div</sub></label>
+            <div className='control'>
+              <input
+                ref={timeGroupsRef}
+                className='input'
+                aria-label='n'
+                type='number'
+                min='1'
+                step='1'
+                defaultValue={timeGroups}
+              />
             </div>
-            <div className='field-body'>
-              <div className='field'>
-                <div className='control'>
-                  <input
-                    ref={timeGroupsRef}
-                    className='input'
-                    aria-label='n'
-                    type='number'
-                    min='1'
-                    step='1'
-                    defaultValue={timeGroups}
-                  />
-                </div>
-              </div>
-            </div>
+            <p className='help'>Number of horizontal partitions</p>
           </div>
-          <div className='field is-horizontal'>
-            <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-              <label className='label'>F<sub>max</sub></label>
+          <div className='field'>
+            <label className='label'>F<sub>max</sub></label>
+            <div className='control'>
+              <input
+                ref={mutationFrequencyMaxRef}
+                className='input'
+                aria-label='F_max'
+                type='number'
+                min='0'
+                max='0.001'
+                step='0.0001'
+                defaultValue={mutationFrequencyMax}
+              />
             </div>
-            <div className='field-body'>
-              <div className='field'>
-                <div className='control'>
-                  <input
-                    ref={mutationFrequencyMaxRef}
-                    className='input'
-                    aria-label='F_max'
-                    type='number'
-                    min='0'
-                    max='0.001'
-                    step='0.0001'
-                    defaultValue={mutationFrequencyMax}
-                  />
-                </div>
-              </div>
-            </div>
+            <p className='help'>Maximum value of vertical axis (mutation frequency)</p>
           </div>
-          <div className='field is-horizontal'>
-            <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-              <label className='label'>d<sub>max</sub></label>
+          <div className='field'>
+            <label className='label'>d<sub>max</sub></label>
+            <div className='control'>
+              <input
+                ref={doseMaxRef}
+                className='input'
+                aria-label='d_max'
+                type='number'
+                min='0'
+                max='10'
+                step='0.1'
+                defaultValue={doseMax}
+              />
             </div>
-            <div className='field-body'>
-              <div className='field'>
-                <div className='control'>
-                  <input
-                    ref={doseMaxRef}
-                    className='input'
-                    aria-label='d_max'
-                    type='number'
-                    min='0'
-                    max='10'
-                    step='0.1'
-                    defaultValue={doseMax}
-                  />
-                </div>
-              </div>
-            </div>
+            <p className='help'>Maximum value of vertical axis (dose rate)</p>
           </div>
         </div>
       </div>

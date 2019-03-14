@@ -20,10 +20,10 @@ const MutationFrequencyPanel = (props) => {
           svgRef={svgRef}
           lines={lines}
           width={800}
-          height={300}
+          height={500}
           topMargin={20}
-          bottomMargin={20}
-          leftMargin={80}
+          bottomMargin={50}
+          leftMargin={100}
           rightMargin={20}
           xMax={xMax}
           yMax={yMax}

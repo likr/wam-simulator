@@ -53,21 +53,21 @@ const LineEditorPanel = (props) => {
           width={800}
           height={200}
           topMargin={20}
-          bottomMargin={20}
-          leftMargin={80}
+          bottomMargin={50}
+          leftMargin={100}
           rightMargin={20}
           xMax={timeMax}
           yMax={mutationFrequencyMax}
         />
-        <label className='label'>Dose</label>
+        <label className='label'>Dose Rate</label>
         <DoseChart
           lineIndex={lineIndex}
           line={line}
           width={800}
           height={200}
           topMargin={20}
-          bottomMargin={20}
-          leftMargin={80}
+          bottomMargin={50}
+          leftMargin={100}
           rightMargin={20}
           xMax={timeMax}
           yMax={doseMax}
