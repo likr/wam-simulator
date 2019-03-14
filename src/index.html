@@ -9,7 +9,7 @@
 <meta property="og:title" content="WAM Simulator"/>
 <meta property="og:description" content="Web-based simulator of Whack-a-Mole (WAM) model to describe the biological effects of radiation exposure">
 <meta property="og:site_name" content="WAM Simulator">
-<meta property="og:image" content="./images/ogp.png">
+<meta property="og:image" content="https://wamsim.vdslab.jp/ogp.png">
 <title>WAM Simulator</title>
 <link rel="apple-touch-icon" sizes="180x180" href="./images/icons/icon-180x180.png">
 <link rel="icon" type="image/png" sizes="192x192"  href="./images/icons/icon-192x192.png">
@@ -63,8 +63,66 @@ svg text::selection {
     <section class="section">
       <div class="container">
         <div class="content">
-          <h3>About this page</h3>
-          <p>TBD</p>
+          <h1>Whack-A-Mole (WAM) Model Simulator</h1>
+          <p>
+            The simulator solves a following differential equation:
+              $$\frac{F(t)}{dt} = A(t) - B(t) F(t)$$
+            where,
+              $$A(t) = a_0 + a_1 d(t)$$
+              $$B(t) = b_0 + b_1 d(t)$$
+          <p>
+          <table>
+            <thead>
+              <tr>
+                <th>Notation</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>\(t\)</td>
+                <td>Time (hour)</td>
+              </tr>
+              <tr>
+                <td>\(F(t)\)</td>
+                <td>Mutation frequency at \(t\)</td>
+              </tr>
+              <tr>
+                <td>\(A(t)\)</td>
+                <td>Effect of increasing mutations at \(t\)</td>
+              </tr>
+              <tr>
+                <td>\(B(t)\)</td>
+                <td>Effect of decreasing mutations at \(t\)</td>
+              </tr>
+              <tr>
+                <td>\(a_0\)</td>
+                <td>Increase rate of mutation in natural environment</td>
+              </tr>
+              <tr>
+                <td>\(a_1\)</td>
+                <td>Increase rate of mutation correspnding to radiation dose</td>
+              </tr>
+              <tr>
+                <td>\(b_0\)</td>
+                <td>Mutation repair rate in natural environment</td>
+              </tr>
+              <tr>
+                <td>\(b_1\)</td>
+                <td>Mutation repair rate corresponding to radiation dose</td>
+              </tr>
+              <tr>
+                <td>\(d(t)\)</td>
+                <td>Dose rate at \(t\) (Gy/hour)</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>Publications</h3>
+          <ul>
+            <li>Manabe, Yuichiro, et al. "Whack-a-mole model: towards a unified description of biological effects caused by radiation exposure." Journal of the Physical Society of Japan 84.4 (2015): 044002.  </li>
+            <li>Wada, Takahiro, et al. "Dose and dose-rate dependence of mutation frequency under long-term exposure–a new look at DDREF from WAM model." Journal of Nuclear Science and Technology 53.11 (2016): 1824-1830.</li>
+            <li>Tsunoyama, Yuichi, et al. "Verification of a dose rate-responsive dynamic equilibrium model on radiation-induced mutation frequencies in mice." International journal of radiation biology just-accepted (2019): 1-19.</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -76,5 +134,6 @@ svg text::selection {
   </div>
   <a id="download" />
   <script src="./index.js"></script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
