@@ -31,18 +31,10 @@ const updateD = (xMax, yMax, line) => {
   return line
 }
 
-const defaultParams = {
-  F0: 1,
-  a0: 2.13,
-  a1: 4.95,
-  b0: 2.39,
-  b1: 1.43
-}
-
 const initialState = {
   timeMax: 1200,
   timeGroups: 24,
-  mutationFrequencyMax: 0.005,
+  mutationFrequencyMax: 2e-4,
   doseMax: 0.1,
   lines: []
 }
@@ -85,7 +77,13 @@ export const reducer = createReducer(initialState, {
     const lines = Array.from(state.lines)
     const line = Object.assign({}, lines[lineIndex])
     line.input = initialDInput(state.timeGroups)
-    line.params = defaultParams
+    line.params = {
+      F0: 1,
+      a0: 3.2,
+      a1: 3.0,
+      b0: 3.0,
+      b1: 1.4
+    }
     lines[lineIndex] = updateD(state.timeMax, state.doseMax, line)
     return Object.assign({}, state, {
       lines
@@ -112,7 +110,13 @@ export const reducer = createReducer(initialState, {
     lines.push(updateD(state.timeMax, state.doseMax, {
       color: d3.hsl(Math.random() * 360, 1, 0.5).hex(),
       input: initialDInput(state.timeGroups),
-      params: defaultParams
+      params: {
+        F0: 1,
+        a0: 3.2,
+        a1: 3.0,
+        b0: 3.0,
+        b1: 1.4
+      }
     }))
     return Object.assign({}, state, {
       lines

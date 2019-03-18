@@ -81,7 +81,7 @@ const LineEditorPanel = (props) => {
         <label className='label'>Parameters</label>
         <div className='field is-horizontal'>
           <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-            <label className='label'>a<sub>0</sub> = {a0.toFixed(2)}e-8</label>
+            <label className='label'>a<sub>0</sub> = {a0.toFixed(1)}e-8</label>
           </div>
           <div className='field-body'>
             <div className='field'>
@@ -91,7 +91,7 @@ const LineEditorPanel = (props) => {
                   type='range'
                   min='0'
                   max='10'
-                  step='0.01'
+                  step='0.1'
                   value={a0}
                   onChange={(event) => {
                     dispatch(updateLineParams({ lineIndex, params: { a0: +event.target.value } }))
@@ -103,7 +103,7 @@ const LineEditorPanel = (props) => {
         </div>
         <div className='field is-horizontal'>
           <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-            <label className='label'>a<sub>1</sub> = {a1.toFixed(2)}e-4</label>
+            <label className='label'>a<sub>1</sub> = {a1.toFixed(1)}e-5</label>
           </div>
           <div className='field-body'>
             <div className='field'>
@@ -113,7 +113,7 @@ const LineEditorPanel = (props) => {
                   type='range'
                   min='0'
                   max='10'
-                  step='0.01'
+                  step='0.1'
                   value={a1}
                   onChange={(event) => {
                     dispatch(updateLineParams({ lineIndex, params: { a1: +event.target.value } }))
@@ -125,7 +125,7 @@ const LineEditorPanel = (props) => {
         </div>
         <div className='field is-horizontal'>
           <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-            <label className='label'>b<sub>0</sub> = {b0.toFixed(2)}e-3</label>
+            <label className='label'>b<sub>0</sub> = {b0.toFixed(1)}e-3</label>
           </div>
           <div className='field-body'>
             <div className='field'>
@@ -135,7 +135,7 @@ const LineEditorPanel = (props) => {
                   type='range'
                   min='0'
                   max='10'
-                  step='0.01'
+                  step='0.1'
                   value={b0}
                   onChange={(event) => {
                     dispatch(updateLineParams({ lineIndex, params: { b0: +event.target.value } }))
@@ -147,7 +147,7 @@ const LineEditorPanel = (props) => {
         </div>
         <div className='field is-horizontal'>
           <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-            <label className='label'>b<sub>1</sub> = {b1.toFixed(2)}e-1</label>
+            <label className='label'>b<sub>1</sub> = {b1.toFixed(1)}e-1</label>
           </div>
           <div className='field-body'>
             <div className='field'>
@@ -157,7 +157,7 @@ const LineEditorPanel = (props) => {
                   type='range'
                   min='0'
                   max='10'
-                  step='0.01'
+                  step='0.1'
                   value={b1}
                   onChange={(event) => {
                     dispatch(updateLineParams({ lineIndex, params: { b1: +event.target.value } }))
@@ -169,7 +169,7 @@ const LineEditorPanel = (props) => {
         </div>
         <div className='field is-horizontal'>
           <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-            <label className='label'>F<sub>0</sub> = {F0.toFixed(2)}e-5</label>
+            <label className='label'>F<sub>0</sub> = {F0.toFixed(1)}e-5</label>
           </div>
           <div className='field-body'>
             <div className='field'>

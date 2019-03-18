@@ -72,6 +72,7 @@ const ParameterFormPanel = (props) => {
                 aria-label='F_max'
                 type='number'
                 min='0'
+                max='0.001'
                 step='0.0001'
                 defaultValue={mutationFrequencyMax}
               />
