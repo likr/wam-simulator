@@ -8,7 +8,7 @@ export const wam = (d, params, rk = true) => {
   Ft[0] = F0
   for (let i = 1; i < d.length; ++i) {
     if (rk) {
-      const h = (3 * d[i] - d[i - 1]) / 2
+      const h = d[i] + d[i - 1] / 2
       const k1 = (a0 + a1 * d[i - 1]) - (b0 + b1 * d[i - 1]) * Ft[i - 1]
       const k2 = (a0 + a1 * h) - (b0 + b1 * h) * (Ft[i - 1] + k1 / 2)
       const k3 = (a0 + a1 * h) - (b0 + b1 * h) * (Ft[i - 1] + k2 / 2)
