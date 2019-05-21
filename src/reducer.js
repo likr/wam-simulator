@@ -9,7 +9,7 @@ import {
   updateLineParams,
   updateParams
 } from './actions'
-import { wam } from './wam'
+import { lqm as wam } from './wam'
 
 const initialDInput = (steps) => {
   const dInput = new Array(steps)
