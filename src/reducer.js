@@ -87,10 +87,10 @@ export const reducer = createReducer(initialState, {
     line.params = {
       model: 'wam',
       F0: 1,
-      a0: 3.2,
-      a1: 3.0,
-      b0: 3.0,
-      b1: 1.4
+      a0: 3.24,
+      a1: 2.94,
+      b0: 3.00,
+      b1: 1.36
     }
     lines[lineIndex] = updateD(state.timeMax, state.doseMax, line)
     return Object.assign({}, state, {
@@ -121,10 +121,10 @@ export const reducer = createReducer(initialState, {
       params: {
         model: 'wam',
         F0: 1,
-        a0: 3.2,
-        a1: 3.0,
-        b0: 3.0,
-        b1: 1.4
+        a0: 3.24,
+        a1: 2.94,
+        b0: 3.00,
+        b1: 1.36
       }
     }))
     return Object.assign({}, state, {
