@@ -25,7 +25,7 @@ const LineEditorPanel = (props) => {
     input,
     params
   } = line
-  const { F0, a0, a1, b0, b1 } = params
+  const { model, F0, a0, a1, b0, b1 } = params
 
   return <div className='panel'>
     <p className='panel-heading'>Line {lineIndex + 1} (D = {d.reduce((a, v) => a + v).toFixed(3)}Gy)</p>
@@ -186,6 +186,21 @@ const LineEditorPanel = (props) => {
                   }}
                 />
               </div>
+            </div>
+          </div>
+        </div>
+        <div className='field'>
+          <div className='control'>
+            <div className='select is-fullwidth'>
+              <select
+                value={model}
+                onChange={(event) => {
+                  dispatch(updateLineParams({ lineIndex, params: { model: event.target.value } }))
+                }}
+              >
+                <option value='wam'>WAM</option>
+                <option value='lqm'>LQM</option>
+              </select>
             </div>
           </div>
         </div>

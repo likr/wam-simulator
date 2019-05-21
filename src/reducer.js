@@ -9,7 +9,10 @@ import {
   updateLineParams,
   updateParams
 } from './actions'
-import { lqm as wam } from './wam'
+import {
+  lqm,
+  wam
+} from './wam'
 
 const initialDInput = (steps) => {
   const dInput = new Array(steps)
@@ -27,7 +30,11 @@ const updateD = (xMax, yMax, line) => {
     d[i] = (input[index] / 10) * yMax
   }
   line.d = d
-  line.line = wam(d, params)
+  if (params.model === 'lqm') {
+    line.line = lqm(d, params)
+  } else {
+    line.line = wam(d, params)
+  }
   return line
 }
 
@@ -78,6 +85,7 @@ export const reducer = createReducer(initialState, {
     const line = Object.assign({}, lines[lineIndex])
     line.input = initialDInput(state.timeGroups)
     line.params = {
+      model: 'wam',
       F0: 1,
       a0: 3.2,
       a1: 3.0,
@@ -111,6 +119,7 @@ export const reducer = createReducer(initialState, {
       color: d3.hsl(Math.random() * 360, 1, 0.5).hex(),
       input: initialDInput(state.timeGroups),
       params: {
+        model: 'wam',
         F0: 1,
         a0: 3.2,
         a1: 3.0,
