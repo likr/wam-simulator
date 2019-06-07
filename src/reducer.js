@@ -46,6 +46,19 @@ const initialState = {
   lines: []
 }
 
+const initialLineParams = () => {
+  return {
+    model: 'wam',
+    F0: 1,
+    a0: 3.24,
+    a1: 2.94,
+    b0: 3.00,
+    b1: 1.36,
+    alpha: 2.79,
+    beta: 2.32
+  }
+}
+
 export const reducer = createReducer(initialState, {
   [updateParams]: (prevState, action) => {
     const state = Object.assign({}, prevState, action.payload)
@@ -84,14 +97,7 @@ export const reducer = createReducer(initialState, {
     const lines = Array.from(state.lines)
     const line = Object.assign({}, lines[lineIndex])
     line.input = initialDInput(state.timeGroups)
-    line.params = {
-      model: 'wam',
-      F0: 1,
-      a0: 3.24,
-      a1: 2.94,
-      b0: 3.00,
-      b1: 1.36
-    }
+    line.params = initialLineParams()
     lines[lineIndex] = updateD(state.timeMax, state.doseMax, line)
     return Object.assign({}, state, {
       lines
@@ -118,14 +124,7 @@ export const reducer = createReducer(initialState, {
     lines.push(updateD(state.timeMax, state.doseMax, {
       color: d3.hsl(Math.random() * 360, 1, 0.5).hex(),
       input: initialDInput(state.timeGroups),
-      params: {
-        model: 'wam',
-        F0: 1,
-        a0: 3.24,
-        a1: 2.94,
-        b0: 3.00,
-        b1: 1.36
-      }
+      params: initialLineParams()
     }))
     return Object.assign({}, state, {
       lines

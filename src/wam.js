@@ -22,19 +22,13 @@ export const wam = (d, params, rk = true) => {
 }
 
 export const lqm = (d, params) => {
-  const a0 = params.a0 * 1e-8
-  const a1 = params.a1 * 1e-5
-  const b0 = params.b0 * 1e-3
-  const b1 = params.b1 * 1e-1
+  const alpha = params.alpha * 1e-5
+  const beta = params.beta * 1e-6
   const F0 = params.F0 * 1e-5
   const Ft = new Array(d.length)
 
-  const alpha = a1 - a0 * b1 / b0
-  // const dr = d.reduce((a, v) => a + v, 0) / d.length
-
   let bias = F0
   let D = 0
-  let start = 0
   for (let i = 0; i < d.length; ++i) {
     if (d[i] === 0) {
       if (i > 0) {
@@ -42,13 +36,7 @@ export const lqm = (d, params) => {
       }
       D = 0
     }
-    if (d[i] > 0 && (i === 0 || d[i - 1] === 0)) {
-      start = i
-    }
-    // const dr = 0.1
     D += d[i]
-    const dr = D / (i - start + 1)
-    const beta = -alpha * (b0 / dr + b1) / 2
     if (D === 0) {
       Ft[i] = i === 0 ? bias : Ft[i - 1]
     } else {
