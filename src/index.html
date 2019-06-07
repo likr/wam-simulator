@@ -12,6 +12,8 @@
 <meta property="og:image" content="https://wamsim.vdslab.jp/ogp.png">
 <meta name="twitter:card" content="summary_large_image">
 <title>WAM Simulator</title>
+<link rel="stylesheet" href="../node_modules/bulma/css/bulma.min.css">
+<link rel="stylesheet" href="../node_modules/bulma-extensions/dist/css/bulma-extensions.min.css">
 <link rel="apple-touch-icon" sizes="180x180" href="./images/icons/icon-180x180.png">
 <link rel="icon" type="image/png" sizes="192x192"  href="./images/icons/icon-192x192.png">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -56,9 +58,7 @@ svg text::selection {
     </nav>
     <section class="section">
       <div class="container">
-        <div id="content">
-          <progress class="progress" max="100" />
-        </div>
+        <div id="content"></div>
       </div>
     </section>
     <section class="section">
@@ -136,6 +136,9 @@ svg text::selection {
         <p>powered by WAM Team</p>
       </div>
     </footer>
+  </div>
+  <div class="pageloader is-link is-active">
+    <p class="title">WAM Simulator</p>
   </div>
   <a id="download" />
   <script src="./index.js"></script>

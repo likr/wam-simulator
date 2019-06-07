@@ -1,5 +1,3 @@
-import 'bulma/css/bulma.min.css'
-import 'bulma-slider/dist/css/bulma-slider.min.css'
 import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -23,4 +21,8 @@ const App = () => {
   </Provider>
 }
 
-render(<App />, document.getElementById('content'))
+render(<App />, document.getElementById('content'), () => {
+  setTimeout(() => {
+    document.querySelector('.pageloader').classList.remove('is-active')
+  }, 500)
+})
