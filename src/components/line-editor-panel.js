@@ -6,14 +6,63 @@ import {
   updateColor,
   updateLineParams
 } from '../actions'
+import { exportCSV, exportImage } from '../export'
 import DoseChart from './dose-chart'
 import MutationChart from './mutation-chart'
+
+const Slider = ({ property, value, digits, lineIndex, dispatch, children }) => {
+  return <div className='field'>
+    <label className='label is-small has-text-centered'>{children} = {value.toFixed(2)}e-{digits}</label>
+    <div className='control'>
+      <input
+        className='slider is-small is-fullwidth'
+        type='range'
+        min='0'
+        max='10'
+        step='0.1'
+        value={value}
+        onChange={(event) => {
+          dispatch(updateLineParams({ lineIndex, params: { [property]: +event.target.value } }))
+        }}
+      />
+    </div>
+  </div>
+}
+
+const WAMFields = ({ a0, a1, b0, b1, lineIndex, dispatch }) => {
+  return <>
+    <Slider property='a0' value={a0} digits='8' lineIndex={lineIndex} dispatch={dispatch}>
+      a<sub>0</sub>
+    </Slider>
+    <Slider property='a1' value={a1} digits='5' lineIndex={lineIndex} dispatch={dispatch}>
+      a<sub>1</sub>
+    </Slider>
+    <Slider property='b0' value={b0} digits='3' lineIndex={lineIndex} dispatch={dispatch}>
+      b<sub>0</sub>
+    </Slider>
+    <Slider property='b1' value={b1} digits='1' lineIndex={lineIndex} dispatch={dispatch}>
+      b<sub>1</sub>
+    </Slider>
+  </>
+}
+
+const LQMFields = ({ alpha, beta, lineIndex, dispatch }) => {
+  return <>
+    <Slider property='alpha' value={alpha} digits='5' lineIndex={lineIndex} dispatch={dispatch}>
+      a<sub>0</sub>
+    </Slider>
+    <Slider property='beta' value={beta} digits='6' lineIndex={lineIndex} dispatch={dispatch}>
+      a<sub>0</sub>
+    </Slider>
+  </>
+}
 
 const LineEditorPanel = (props) => {
   const {
     lineIndex,
     line,
     timeMax,
+    totalDoseMax,
     doseMax,
     mutationFrequencyMax,
     timeStep,
@@ -21,156 +70,18 @@ const LineEditorPanel = (props) => {
   } = props
   const {
     color,
-    d,
+    totalD,
     input,
     params
   } = line
   const { model, F0, a0, a1, b0, b1, alpha, beta } = params
 
-  const WAMFields = () => {
-    return <>
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-          <label className='label'>a<sub>0</sub> = {a0.toFixed(2)}e-8</label>
-        </div>
-        <div className='field-body'>
-          <div className='field'>
-            <div className='control'>
-              <input
-                className='slider is-fullwidth'
-                type='range'
-                min='0'
-                max='10'
-                step='0.1'
-                value={a0}
-                onChange={(event) => {
-                  dispatch(updateLineParams({ lineIndex, params: { a0: +event.target.value } }))
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-          <label className='label'>a<sub>1</sub> = {a1.toFixed(2)}e-5</label>
-        </div>
-        <div className='field-body'>
-          <div className='field'>
-            <div className='control'>
-              <input
-                className='slider is-fullwidth'
-                type='range'
-                min='0'
-                max='10'
-                step='0.1'
-                value={a1}
-                onChange={(event) => {
-                  dispatch(updateLineParams({ lineIndex, params: { a1: +event.target.value } }))
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-          <label className='label'>b<sub>0</sub> = {b0.toFixed(2)}e-3</label>
-        </div>
-        <div className='field-body'>
-          <div className='field'>
-            <div className='control'>
-              <input
-                className='slider is-fullwidth'
-                type='range'
-                min='0'
-                max='10'
-                step='0.1'
-                value={b0}
-                onChange={(event) => {
-                  dispatch(updateLineParams({ lineIndex, params: { b0: +event.target.value } }))
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-          <label className='label'>b<sub>1</sub> = {b1.toFixed(2)}e-1</label>
-        </div>
-        <div className='field-body'>
-          <div className='field'>
-            <div className='control'>
-              <input
-                className='slider is-fullwidth'
-                type='range'
-                min='0'
-                max='10'
-                step='0.1'
-                value={b1}
-                onChange={(event) => {
-                  dispatch(updateLineParams({ lineIndex, params: { b1: +event.target.value } }))
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  }
-
-  const LQMFields = () => {
-    return <>
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-          <label className='label'>α = {alpha.toFixed(2)}e-5</label>
-        </div>
-        <div className='field-body'>
-          <div className='field'>
-            <div className='control'>
-              <input
-                className='slider is-fullwidth'
-                type='range'
-                min='0'
-                max='10'
-                step='0.1'
-                value={alpha}
-                onChange={(event) => {
-                  dispatch(updateLineParams({ lineIndex, params: { alpha: +event.target.value } }))
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className='field is-horizontal'>
-        <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-          <label className='label'>β = {beta.toFixed(2)}e-6</label>
-        </div>
-        <div className='field-body'>
-          <div className='field'>
-            <div className='control'>
-              <input
-                className='slider is-fullwidth'
-                type='range'
-                min='0'
-                max='10'
-                step='0.1'
-                value={beta}
-                onChange={(event) => {
-                  dispatch(updateLineParams({ lineIndex, params: { beta: +event.target.value } }))
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  }
+  const chart1Ref = React.createRef()
+  const chart2Ref = React.createRef()
+  const chart3Ref = React.createRef()
 
   return <div className='panel'>
-    <p className='panel-heading'>Line {lineIndex + 1} (D = {d.reduce((a, v) => a + v).toFixed(3)}Gy)</p>
+    <p className='panel-heading'>Line {lineIndex + 1} (D = {totalD.toFixed(3)}Gy)</p>
     <div className='panel-block'>
       <div className='control'>
         <label className='label'>Color</label>
@@ -190,63 +101,97 @@ const LineEditorPanel = (props) => {
     <div className='panel-block'>
       <div className='control'>
         <label className='label'>Mutation Frequency</label>
-        <MutationChart
-          lines={[line]}
-          width={800}
-          height={200}
-          topMargin={20}
-          bottomMargin={50}
-          leftMargin={110}
-          rightMargin={20}
-          xMax={timeMax}
-          yMax={mutationFrequencyMax}
-        />
+        <div className='field'>
+          <MutationChart
+            svgRef={chart1Ref}
+            lines={[line]}
+            lineProperty='line'
+            width={800}
+            height={200}
+            topMargin={20}
+            bottomMargin={50}
+            leftMargin={110}
+            rightMargin={20}
+            xLabel='Time (hour)'
+            xMax={timeMax}
+            yMax={mutationFrequencyMax}
+          />
+        </div>
+        <div className='field is-grouped'>
+          <div className='control is-expanded is-hidden-touch'>
+            <button className='button is-small is-fullwidth' onClick={() => { exportCSV(line.line, 't', 'F', `line${lineIndex + 1}-hour-mf`) }}>export CSV</button>
+          </div>
+          <div className='control is-expanded is-hidden-touch'>
+            <button className='button is-small is-fullwidth' onClick={() => { exportImage('svg', chart1Ref, `line${lineIndex + 1}-hour-mf`) }}>export SVG</button>
+          </div>
+          <div className='control is-expanded is-hidden-touch'>
+            <button className='button is-small is-fullwidth' onClick={() => { exportImage('png', chart1Ref, `line${lineIndex + 1}-hour-mf`) }}>export PNG</button>
+          </div>
+        </div>
+        <div className='field'>
+          <MutationChart
+            svgRef={chart2Ref}
+            lines={[line]}
+            lineProperty='lineTotal'
+            width={800}
+            height={200}
+            topMargin={20}
+            bottomMargin={50}
+            leftMargin={110}
+            rightMargin={20}
+            xLabel='Accumulated Dose (Gy)'
+            xMax={totalDoseMax}
+            yMax={mutationFrequencyMax}
+          />
+        </div>
+        <div className='field is-grouped'>
+          <div className='control is-expanded is-hidden-touch'>
+            <button className='button is-small is-fullwidth' onClick={() => { exportCSV(line.lineTotal, 'D', 'F', `line${lineIndex + 1}-dose-mf`) }}>export CSV</button>
+          </div>
+          <div className='control is-expanded is-hidden-touch'>
+            <button className='button is-small is-fullwidth' onClick={() => { exportImage('svg', chart2Ref, `line${lineIndex + 1}-dose-mf`) }}>export SVG</button>
+          </div>
+          <div className='control is-expanded is-hidden-touch'>
+            <button className='button is-small is-fullwidth' onClick={() => { exportImage('png', chart2Ref, `line${lineIndex + 1}-dose-mf`) }}>export PNG</button>
+          </div>
+        </div>
         <label className='label'>Dose Rate</label>
-        <DoseChart
-          lineIndex={lineIndex}
-          line={line}
-          width={800}
-          height={200}
-          topMargin={20}
-          bottomMargin={50}
-          leftMargin={110}
-          rightMargin={20}
-          xMax={timeMax}
-          yMax={doseMax}
-          xStep={timeStep}
-          yStep={10}
-        />
+        <div className='field'>
+          <DoseChart
+            svgRef={chart3Ref}
+            lineIndex={lineIndex}
+            line={line}
+            width={800}
+            height={200}
+            topMargin={20}
+            bottomMargin={50}
+            leftMargin={110}
+            rightMargin={20}
+            xMax={timeMax}
+            yMax={doseMax}
+            xStep={timeStep}
+            yStep={10}
+          />
+        </div>
+        <div className='field is-grouped'>
+          <div className='control is-expanded is-hidden-touch'>
+            <button className='button is-small is-fullwidth' onClick={() => { exportCSV(line.d.map((v, i) => [i, v]), 't', 'D', `line${lineIndex + 1}-hour-dose`) }}>export CSV</button>
+          </div>
+          <div className='control is-expanded is-hidden-touch'>
+            <button className='button is-small is-fullwidth' onClick={() => { exportImage('svg', chart3Ref, `line${lineIndex + 1}-hour-dose`) }}>export SVG</button>
+          </div>
+          <div className='control is-expanded is-hidden-touch'>
+            <button className='button is-small is-fullwidth' onClick={() => { exportImage('png', chart3Ref, `line${lineIndex + 1}-hour-dose`) }}>export PNG</button>
+          </div>
+        </div>
       </div>
     </div>
     <div className='panel-block'>
       <div className='control'>
         <label className='label'>Parameters</label>
-        { model === 'wam' ? <WAMFields /> : <LQMFields /> }
-        <div className='field is-horizontal'>
-          <div className='field-label is-normal' style={{ textAlign: 'left' }}>
-            <label className='label'>F<sub>0</sub> = {F0.toFixed(1)}e-5</label>
-          </div>
-          <div className='field-body'>
-            <div className='field'>
-              <div className='control'>
-                <input
-                  className='slider is-fullwidth'
-                  type='range'
-                  min='0'
-                  max='100'
-                  step='1'
-                  value={F0}
-                  onChange={(event) => {
-                    dispatch(updateLineParams({ lineIndex, params: { F0: +event.target.value } }))
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
         <div className='field'>
           <div className='control'>
-            <div className='select is-fullwidth'>
+            <div className='select is-small is-fullwidth'>
               <select
                 value={model}
                 onChange={(event) => {
@@ -259,14 +204,22 @@ const LineEditorPanel = (props) => {
             </div>
           </div>
         </div>
+        {
+          model === 'wam'
+            ? <WAMFields a0={a0} a1={a1} b0={b0} b1={b1} lineIndex={lineIndex} dispatch={dispatch} />
+            : <LQMFields alpha={alpha} beta={beta} lineIndex={lineIndex} dispatch={dispatch} />
+        }
+        <Slider property='F0' value={F0} digits='5' lineIndex={lineIndex} dispatch={dispatch}>
+          F<sub>0</sub>
+        </Slider>
       </div>
     </div>
     <div className='panel-block'>
       <div className='control'>
         <div className='field is-grouped'>
-          <div className='control'>
+          <div className='control is-expanded'>
             <button
-              className='button'
+              className='button is-small is-fullwidth'
               onClick={() => {
                 dispatch(resetLine({ lineIndex }))
               }}
@@ -274,9 +227,9 @@ const LineEditorPanel = (props) => {
               Reset
             </button>
           </div>
-          <div className='control'>
+          <div className='control is-expanded'>
             <button
-              className='button'
+              className='button is-small is-fullwidth'
               onClick={() => {
                 dispatch(removeLine({ lineIndex }))
               }}

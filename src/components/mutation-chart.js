@@ -5,12 +5,14 @@ const MutationChart = (props) => {
   const {
     svgRef,
     lines,
+    lineProperty,
     width,
     height,
     leftMargin,
     rightMargin,
     bottomMargin,
     topMargin,
+    xLabel,
     xMax,
     yMax
   } = props
@@ -31,11 +33,13 @@ const MutationChart = (props) => {
       <g transform={`translate(${leftMargin},${topMargin})`}>
         <g>
           {
-            lines.map(({ color, d, line }, i) => {
+            lines.map((item, i) => {
+              const { color } = item
+              const line = item[lineProperty]
               const path = d3.path()
-              path.moveTo(xScale(0), yScale(line[0]))
-              for (let i = 1; i < xMax; ++i) {
-                path.lineTo(xScale(i), yScale(line[i]))
+              path.moveTo(xScale(line[0][0]), yScale(line[0][1]))
+              for (let i = 1; i < line.length; ++i) {
+                path.lineTo(xScale(line[i][0]), yScale(line[i][1]))
               }
               return <path key={i} d={path.toString()} fill='none' stroke={color} />
             })
@@ -63,7 +67,7 @@ const MutationChart = (props) => {
               </g>
             })
           }
-          <text transform={`translate(${width / 2},${height + 40})`} textAnchor='middle'>Time (hour)</text>
+          <text transform={`translate(${width / 2},${height + 40})`} textAnchor='middle'>{xLabel}</text>
         </g>
       </g>
     </svg>

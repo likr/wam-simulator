@@ -8,12 +8,14 @@ const ParameterFormPanel = (props) => {
   const { params, dispatch } = props
   const {
     timeMax,
+    totalDoseMax,
     timeGroups,
     mutationFrequencyMax,
     doseMax
   } = params
 
   const timeMaxRef = React.createRef()
+  const totalDoseMaxRef = React.createRef()
   const timeGroupsRef = React.createRef()
   const mutationFrequencyMaxRef = React.createRef()
   const doseMaxRef = React.createRef()
@@ -24,6 +26,7 @@ const ParameterFormPanel = (props) => {
         event.preventDefault()
         dispatch(updateParams({
           timeMax: +timeMaxRef.current.value,
+          totalDoseMax: +totalDoseMaxRef.current.value,
           timeGroups: +timeGroupsRef.current.value,
           mutationFrequencyMax: +mutationFrequencyMaxRef.current.value,
           doseMax: +doseMaxRef.current.value
@@ -47,6 +50,21 @@ const ParameterFormPanel = (props) => {
               />
             </div>
             <p className='help'>Maximum value of horizontal axis (time (hour))</p>
+          </div>
+          <div className='field'>
+            <label className='label'>D<sub>max</sub></label>
+            <div className='control'>
+              <input
+                ref={totalDoseMaxRef}
+                className='input'
+                aria-label='d_r'
+                type='number'
+                min='0'
+                step='1'
+                defaultValue={totalDoseMax}
+              />
+            </div>
+            <p className='help'>Maximum value of horizontal axis (accumulated dose (Gy))</p>
           </div>
           <div className='field'>
             <label className='label'>t<sub>div</sub></label>

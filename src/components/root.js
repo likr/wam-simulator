@@ -8,6 +8,7 @@ const Root = (props) => {
   const {
     lines,
     timeMax,
+    totalDoseMax,
     timeGroups,
     mutationFrequencyMax,
     doseMax
@@ -20,8 +21,9 @@ const Root = (props) => {
       <div className='column'>
         <MutationFrequencyPanel
           lines={lines}
-          xMax={timeMax}
-          yMax={mutationFrequencyMax}
+          timeMax={timeMax}
+          totalDoseMax={totalDoseMax}
+          mutationFrequencyMax={mutationFrequencyMax}
         />
       </div>
     </div>
@@ -33,6 +35,7 @@ const Root = (props) => {
               lineIndex={i}
               line={line}
               timeMax={timeMax}
+              totalDoseMax={totalDoseMax}
               doseMax={doseMax}
               mutationFrequencyMax={mutationFrequencyMax}
               timeStep={timeGroups}

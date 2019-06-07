@@ -35,11 +35,22 @@ const updateD = (xMax, yMax, line) => {
   } else {
     line.line = wam(d, params)
   }
+  line.line = line.line.map((v, i) => [i, v])
+  let totalD = 0
+  line.lineTotal = []
+  for (const [i, v] of line.line) {
+    if (i === 0 || d[i] > 0) {
+      totalD += d[i]
+      line.lineTotal.push([totalD, v])
+    }
+  }
+  line.totalD = totalD
   return line
 }
 
 const initialState = {
   timeMax: 1200,
+  totalDoseMax: 120,
   timeGroups: 24,
   mutationFrequencyMax: 2e-4,
   doseMax: 0.1,

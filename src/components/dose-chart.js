@@ -9,6 +9,7 @@ let clicked = false // XXX
 
 const DoseChart = (props) => {
   const {
+    svgRef,
     lineIndex,
     line,
     width,
@@ -46,6 +47,7 @@ const DoseChart = (props) => {
 
   return <div className='svg-box' style={{ paddingTop: `${100 * (height + topMargin + bottomMargin) / (width + leftMargin + rightMargin)}%` }}>
     <svg
+      ref={svgRef}
       className='svg-box-content'
       viewBox={`0, 0, ${width + leftMargin + rightMargin} ${height + topMargin + bottomMargin}`}
       onMouseDown={() => {
