@@ -14,6 +14,8 @@ import {
   wam
 } from './wam'
 
+const colorScale = d3.scaleOrdinal(d3.schemeCategory10)
+
 const initialDInput = (steps) => {
   const dInput = new Array(steps)
   for (let i = 0; i < steps; ++i) {
@@ -133,7 +135,7 @@ export const reducer = createReducer(initialState, {
   [addLine]: (state, action) => {
     const lines = Array.from(state.lines)
     lines.push(updateD(state.timeMax, state.doseMax, {
-      color: d3.hsl(Math.random() * 360, 1, 0.5).hex(),
+      color: colorScale(lines.length),
       input: initialDInput(state.timeGroups),
       params: initialLineParams()
     }))

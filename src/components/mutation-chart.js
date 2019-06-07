@@ -41,7 +41,7 @@ const MutationChart = (props) => {
               for (let i = 1; i < line.length; ++i) {
                 path.lineTo(xScale(line[i][0]), yScale(line[i][1]))
               }
-              return <path key={i} d={path.toString()} fill='none' stroke={color} />
+              return <path key={i} d={path.toString()} fill='none' stroke={color} strokeWidth='3' opacity='0.7' />
             })
           }
         </g>
