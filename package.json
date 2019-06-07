@@ -1,8 +1,7 @@
 {
   "name": "wam-simulator",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Whack-A-Mole (WAM) Model Simulator",
   "dependencies": {
     "bulma": "^0.7.5",
     "bulma-extensions": "^6.2.7",
@@ -27,9 +26,9 @@
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Yosuke Onoue<onoue@likr-lab.com>",
+  "license": "MIT",
+  "private": true,
   "cache": {
     "inDev": true
   },
