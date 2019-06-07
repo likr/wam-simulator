@@ -119,13 +119,13 @@ const LineEditorPanel = (props) => {
         </div>
         <div className='field is-grouped'>
           <div className='control is-expanded is-hidden-touch'>
-            <button className='button is-small is-fullwidth' onClick={() => { exportCSV(line.line, 't', 'F', `line${lineIndex + 1}-hour-mf`) }}>export CSV</button>
+            <button className='button is-small is-fullwidth' onClick={() => { exportCSV(line.line, 't', 'F', `line${lineIndex + 1}-hour-mf`) }}>Save as CSV</button>
           </div>
           <div className='control is-expanded is-hidden-touch'>
-            <button className='button is-small is-fullwidth' onClick={() => { exportImage('svg', chart1Ref, `line${lineIndex + 1}-hour-mf`) }}>export SVG</button>
+            <button className='button is-small is-fullwidth' onClick={() => { exportImage('svg', chart1Ref, `line${lineIndex + 1}-hour-mf`) }}>Save as SVG</button>
           </div>
           <div className='control is-expanded is-hidden-touch'>
-            <button className='button is-small is-fullwidth' onClick={() => { exportImage('png', chart1Ref, `line${lineIndex + 1}-hour-mf`) }}>export PNG</button>
+            <button className='button is-small is-fullwidth' onClick={() => { exportImage('png', chart1Ref, `line${lineIndex + 1}-hour-mf`) }}>Save as PNG</button>
           </div>
         </div>
         <div className='field'>
@@ -146,13 +146,13 @@ const LineEditorPanel = (props) => {
         </div>
         <div className='field is-grouped'>
           <div className='control is-expanded is-hidden-touch'>
-            <button className='button is-small is-fullwidth' onClick={() => { exportCSV(line.lineTotal, 'D', 'F', `line${lineIndex + 1}-dose-mf`) }}>export CSV</button>
+            <button className='button is-small is-fullwidth' onClick={() => { exportCSV(line.lineTotal, 'D', 'F', `line${lineIndex + 1}-dose-mf`) }}>Save as CSV</button>
           </div>
           <div className='control is-expanded is-hidden-touch'>
-            <button className='button is-small is-fullwidth' onClick={() => { exportImage('svg', chart2Ref, `line${lineIndex + 1}-dose-mf`) }}>export SVG</button>
+            <button className='button is-small is-fullwidth' onClick={() => { exportImage('svg', chart2Ref, `line${lineIndex + 1}-dose-mf`) }}>Save as SVG</button>
           </div>
           <div className='control is-expanded is-hidden-touch'>
-            <button className='button is-small is-fullwidth' onClick={() => { exportImage('png', chart2Ref, `line${lineIndex + 1}-dose-mf`) }}>export PNG</button>
+            <button className='button is-small is-fullwidth' onClick={() => { exportImage('png', chart2Ref, `line${lineIndex + 1}-dose-mf`) }}>Save as PNG</button>
           </div>
         </div>
         <label className='label'>Dose Rate</label>
@@ -175,13 +175,13 @@ const LineEditorPanel = (props) => {
         </div>
         <div className='field is-grouped'>
           <div className='control is-expanded is-hidden-touch'>
-            <button className='button is-small is-fullwidth' onClick={() => { exportCSV(line.d.map((v, i) => [i, v]), 't', 'D', `line${lineIndex + 1}-hour-dose`) }}>export CSV</button>
+            <button className='button is-small is-fullwidth' onClick={() => { exportCSV(line.d.map((v, i) => [i, v]), 't', 'D', `line${lineIndex + 1}-hour-dose`) }}>Save as CSV</button>
           </div>
           <div className='control is-expanded is-hidden-touch'>
-            <button className='button is-small is-fullwidth' onClick={() => { exportImage('svg', chart3Ref, `line${lineIndex + 1}-hour-dose`) }}>export SVG</button>
+            <button className='button is-small is-fullwidth' onClick={() => { exportImage('svg', chart3Ref, `line${lineIndex + 1}-hour-dose`) }}>Save as SVG</button>
           </div>
           <div className='control is-expanded is-hidden-touch'>
-            <button className='button is-small is-fullwidth' onClick={() => { exportImage('png', chart3Ref, `line${lineIndex + 1}-hour-dose`) }}>export PNG</button>
+            <button className='button is-small is-fullwidth' onClick={() => { exportImage('png', chart3Ref, `line${lineIndex + 1}-hour-dose`) }}>Save as PNG</button>
           </div>
         </div>
       </div>
