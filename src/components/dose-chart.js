@@ -99,7 +99,7 @@ const DoseChart = (props) => {
             yScale.ticks(10).map((v, i) => {
               return <g key={i} transform={`translate(${xScale(0)},${yScale(v)})`}>
                 <line key={i} x1='0' y1='0' x2='-5' y2='0' stroke='#000' />
-                <text dx='-10' dy='5' textAnchor='end'>{v.toFixed(2)}</text>
+                <text dx='-10' dy='5' textAnchor='end'>{v.toFixed(3)}</text>
               </g>
             })
           }
