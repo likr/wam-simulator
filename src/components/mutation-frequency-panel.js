@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addLine } from '../actions'
-import { exportImage } from '../export'
+import { exportTimeCSV, exportDoseCSV, exportImage } from '../export'
 import MutationChart from './mutation-chart'
 
 const MutationFrequencyPanel = (props) => {
@@ -38,6 +38,9 @@ const MutationFrequencyPanel = (props) => {
         </div>
         <div className='field is-grouped'>
           <div className='control is-expanded is-hidden-touch'>
+            <button className='button is-small is-fullwidth' onClick={() => { exportTimeCSV(lines, 'hour-mf') }}>Save as CSV</button>
+          </div>
+          <div className='control is-expanded is-hidden-touch'>
             <button className='button is-small is-fullwidth' onClick={() => { exportImage('svg', chart1Ref, 'hour-mf') }}>export SVG</button>
           </div>
           <div className='control is-expanded is-hidden-touch'>
@@ -65,6 +68,9 @@ const MutationFrequencyPanel = (props) => {
           />
         </div>
         <div className='field is-grouped'>
+          <div className='control is-expanded is-hidden-touch'>
+            <button className='button is-small is-fullwidth' onClick={() => { exportDoseCSV(lines, 'hour-mf') }}>Save as CSV</button>
+          </div>
           <div className='control is-expanded is-hidden-touch'>
             <button className='button is-small is-fullwidth' onClick={() => { exportImage('svg', chart2Ref, 'dose-mf') }}>Save as SVG</button>
           </div>

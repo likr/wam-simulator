@@ -6,7 +6,7 @@ import {
   updateColor,
   updateLineParams
 } from '../actions'
-import { exportCSV, exportImage } from '../export'
+import { exportImage } from '../export'
 import DoseChart from './dose-chart'
 import MutationChart from './mutation-chart'
 
@@ -117,17 +117,6 @@ const LineEditorPanel = (props) => {
             yMax={mutationFrequencyMax}
           />
         </div>
-        <div className='field is-grouped'>
-          <div className='control is-expanded is-hidden-touch'>
-            <button className='button is-small is-fullwidth' onClick={() => { exportCSV(line.line, 't', 'F', `line${lineIndex + 1}-hour-mf`) }}>Save as CSV</button>
-          </div>
-          <div className='control is-expanded is-hidden-touch'>
-            <button className='button is-small is-fullwidth' onClick={() => { exportImage('svg', chart1Ref, `line${lineIndex + 1}-hour-mf`) }}>Save as SVG</button>
-          </div>
-          <div className='control is-expanded is-hidden-touch'>
-            <button className='button is-small is-fullwidth' onClick={() => { exportImage('png', chart1Ref, `line${lineIndex + 1}-hour-mf`) }}>Save as PNG</button>
-          </div>
-        </div>
         <div className='field'>
           <MutationChart
             svgRef={chart2Ref}
@@ -143,17 +132,6 @@ const LineEditorPanel = (props) => {
             xMax={totalDoseMax}
             yMax={mutationFrequencyMax}
           />
-        </div>
-        <div className='field is-grouped'>
-          <div className='control is-expanded is-hidden-touch'>
-            <button className='button is-small is-fullwidth' onClick={() => { exportCSV(line.lineTotal, 'D', 'F', `line${lineIndex + 1}-dose-mf`) }}>Save as CSV</button>
-          </div>
-          <div className='control is-expanded is-hidden-touch'>
-            <button className='button is-small is-fullwidth' onClick={() => { exportImage('svg', chart2Ref, `line${lineIndex + 1}-dose-mf`) }}>Save as SVG</button>
-          </div>
-          <div className='control is-expanded is-hidden-touch'>
-            <button className='button is-small is-fullwidth' onClick={() => { exportImage('png', chart2Ref, `line${lineIndex + 1}-dose-mf`) }}>Save as PNG</button>
-          </div>
         </div>
         <label className='label'>Dose Rate</label>
         <div className='field'>
@@ -174,9 +152,6 @@ const LineEditorPanel = (props) => {
           />
         </div>
         <div className='field is-grouped'>
-          <div className='control is-expanded is-hidden-touch'>
-            <button className='button is-small is-fullwidth' onClick={() => { exportCSV(line.d.map((v, i) => [i, v]), 't', 'D', `line${lineIndex + 1}-hour-dose`) }}>Save as CSV</button>
-          </div>
           <div className='control is-expanded is-hidden-touch'>
             <button className='button is-small is-fullwidth' onClick={() => { exportImage('svg', chart3Ref, `line${lineIndex + 1}-hour-dose`) }}>Save as SVG</button>
           </div>

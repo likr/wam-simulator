@@ -24,12 +24,12 @@ const initialDInput = (steps) => {
   return dInput
 }
 
-const updateD = (xMax, yMax, line) => {
+const updateD = (timeMax, totalDoseMax, doseMax, line) => {
   const { input, params } = line
-  const d = new Array(xMax)
-  for (let i = 0; i < xMax; ++i) {
-    const index = Math.floor(i * input.length / xMax)
-    d[i] = (input[index] / 10) * yMax
+  const d = new Array(timeMax)
+  for (let i = 0; i < timeMax; ++i) {
+    const index = Math.floor(i * input.length / timeMax)
+    d[i] = (input[index] / 10) * doseMax
   }
   line.d = d
   if (params.model === 'lqm') {
@@ -38,15 +38,29 @@ const updateD = (xMax, yMax, line) => {
     line.line = wam(d, params)
   }
   line.line = line.line.map((v, i) => [i, v])
+
   let totalD = 0
-  line.lineTotal = []
-  for (const [i, v] of line.line) {
-    if (i === 0 || d[i] > 0) {
+  const lineTotal = []
+  lineTotal.push([0, line.line[0][0]])
+  for (let i = 1; i < line.line.length; ++i) {
+    if (d[i] > 0) {
       totalD += d[i]
-      line.lineTotal.push([totalD, v])
+      lineTotal.push([totalD, line.line[i][1]])
     }
   }
   line.totalD = totalD
+
+  const interpolator = d3.scaleLinear()
+    .domain(lineTotal.map((row) => row[0]))
+    .range(lineTotal.map((row) => row[1]))
+  const steps = 1000
+  line.lineTotal = new Array(steps)
+  line.lineTotal[0] = lineTotal[0]
+  for (let i = 1; i < steps; ++i) {
+    const D = totalDoseMax / steps * i
+    line.lineTotal[i] = [D, D > totalD ? null : interpolator(D)]
+  }
+
   return line
 }
 
@@ -83,7 +97,7 @@ export const reducer = createReducer(initialState, {
       while (state.timeGroups < input.length) {
         input.pop()
       }
-      return updateD(state.timeMax, state.doseMax, Object.assign({}, line, { input }))
+      return updateD(state.timeMax, state.totalDoseMax, state.doseMax, Object.assign({}, line, { input }))
     })
     return state
   },
@@ -92,7 +106,7 @@ export const reducer = createReducer(initialState, {
     const lines = Array.from(state.lines)
     const line = Object.assign({}, lines[lineIndex])
     line.params = Object.assign({}, line.params, params)
-    lines[lineIndex] = updateD(state.timeMax, state.doseMax, line)
+    lines[lineIndex] = updateD(state.timeMax, state.totalDoseMax, state.doseMax, line)
     return Object.assign({}, state, {
       lines
     })
@@ -111,7 +125,7 @@ export const reducer = createReducer(initialState, {
     const line = Object.assign({}, lines[lineIndex])
     line.input = initialDInput(state.timeGroups)
     line.params = initialLineParams()
-    lines[lineIndex] = updateD(state.timeMax, state.doseMax, line)
+    lines[lineIndex] = updateD(state.timeMax, state.totalDoseMax, state.doseMax, line)
     return Object.assign({}, state, {
       lines
     })
@@ -127,14 +141,14 @@ export const reducer = createReducer(initialState, {
       input[i] = j + 1
     }
     line.input = input
-    lines[lineIndex] = updateD(state.timeMax, state.doseMax, line)
+    lines[lineIndex] = updateD(state.timeMax, state.totalDoseMax, state.doseMax, line)
     return Object.assign({}, state, {
       lines
     })
   },
   [addLine]: (state, action) => {
     const lines = Array.from(state.lines)
-    lines.push(updateD(state.timeMax, state.doseMax, {
+    lines.push(updateD(state.timeMax, state.totalDoseMax, state.doseMax, {
       color: colorScale(lines.length),
       input: initialDInput(state.timeGroups),
       params: initialLineParams()
