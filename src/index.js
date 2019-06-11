@@ -14,11 +14,13 @@ if ('serviceWorker' in navigator) {
 const store = createStore(reducer)
 
 const App = () => {
-  return <Provider store={store}>
-    <Router>
-      <Route path='/' component={Root} exact />
-    </Router>
-  </Provider>
+  return (
+    <Provider store={store}>
+      <Router>
+        <Route path='/' component={Root} exact />
+      </Router>
+    </Provider>
+  )
 }
 
 render(<App />, document.getElementById('content'), () => {

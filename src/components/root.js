@@ -13,38 +13,40 @@ const Root = (props) => {
     mutationFrequencyMax,
     doseMax
   } = props
-  return <div>
-    <div className='columns'>
-      <div className='column is-one-third'>
-        <ParameterFormPanel params={props} />
+  return (
+    <div>
+      <div className='columns'>
+        <div className='column is-one-third'>
+          <ParameterFormPanel params={props} />
+        </div>
+        <div className='column'>
+          <MutationFrequencyPanel
+            lines={lines}
+            timeMax={timeMax}
+            totalDoseMax={totalDoseMax}
+            mutationFrequencyMax={mutationFrequencyMax}
+          />
+        </div>
       </div>
-      <div className='column'>
-        <MutationFrequencyPanel
-          lines={lines}
-          timeMax={timeMax}
-          totalDoseMax={totalDoseMax}
-          mutationFrequencyMax={mutationFrequencyMax}
-        />
+      <div className='columns is-multiline'>
+        {lines.map((line, i) => {
+          return (
+            <div className='column is-half' key={i}>
+              <LineEditorPanel
+                lineIndex={i}
+                line={line}
+                timeMax={timeMax}
+                totalDoseMax={totalDoseMax}
+                doseMax={doseMax}
+                mutationFrequencyMax={mutationFrequencyMax}
+                timeStep={timeGroups}
+              />
+            </div>
+          )
+        })}
       </div>
     </div>
-    <div className='columns is-multiline'>
-      {
-        lines.map((line, i) => {
-          return <div className='column is-half' key={i}>
-            <LineEditorPanel
-              lineIndex={i}
-              line={line}
-              timeMax={timeMax}
-              totalDoseMax={totalDoseMax}
-              doseMax={doseMax}
-              mutationFrequencyMax={mutationFrequencyMax}
-              timeStep={timeGroups}
-            />
-          </div>
-        })
-      }
-    </div>
-  </div>
+  )
 }
 
 export default connect((state) => state)(Root)

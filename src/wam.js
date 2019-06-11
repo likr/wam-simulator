@@ -9,10 +9,10 @@ export const wam = (d, params, rk = true) => {
   for (let i = 1; i < d.length; ++i) {
     if (rk) {
       const h = d[i] + d[i - 1] / 2
-      const k1 = (a0 + a1 * d[i - 1]) - (b0 + b1 * d[i - 1]) * Ft[i - 1]
-      const k2 = (a0 + a1 * h) - (b0 + b1 * h) * (Ft[i - 1] + k1 / 2)
-      const k3 = (a0 + a1 * h) - (b0 + b1 * h) * (Ft[i - 1] + k2 / 2)
-      const k4 = (a0 + a1 * d[i]) - (b0 + b1 * d[i]) * (Ft[i - 1] + k3)
+      const k1 = a0 + a1 * d[i - 1] - (b0 + b1 * d[i - 1]) * Ft[i - 1]
+      const k2 = a0 + a1 * h - (b0 + b1 * h) * (Ft[i - 1] + k1 / 2)
+      const k3 = a0 + a1 * h - (b0 + b1 * h) * (Ft[i - 1] + k2 / 2)
+      const k4 = a0 + a1 * d[i] - (b0 + b1 * d[i]) * (Ft[i - 1] + k3)
       Ft[i] = Ft[i - 1] + (k1 + 2 * k2 + 2 * k3 + k4) / 6
     } else {
       Ft[i] = Ft[i - 1] + (a0 + a1 * d[i]) - (b0 + b1 * d[i]) * Ft[i - 1]
