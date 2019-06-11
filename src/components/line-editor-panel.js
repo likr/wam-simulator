@@ -49,10 +49,10 @@ const WAMFields = ({ a0, a1, b0, b1, lineIndex, dispatch }) => {
 const LQMFields = ({ alpha, beta, lineIndex, dispatch }) => {
   return <>
     <Slider property='alpha' value={alpha} digits='5' lineIndex={lineIndex} dispatch={dispatch}>
-      a<sub>0</sub>
+      α
     </Slider>
     <Slider property='beta' value={beta} digits='6' lineIndex={lineIndex} dispatch={dispatch}>
-      a<sub>0</sub>
+      β
     </Slider>
   </>
 }
