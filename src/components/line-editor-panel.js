@@ -96,7 +96,7 @@ const LQMFields = ({ alpha, beta, lineIndex, dispatch }) => {
       <Slider
         property='beta'
         value={beta}
-        digits='6'
+        digits='5'
         lineIndex={lineIndex}
         dispatch={dispatch}
       >
