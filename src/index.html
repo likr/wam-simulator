@@ -1,147 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="Description" content="Web-based simulator of Whack-a-Mole (WAM) model to describe the biological effects of radiation exposure">
-<meta property="og:url" content="https://wamsim.vdslab.jp/">
-<meta property="og:type" content="website" />
-<meta property="og:title" content="WAM Simulator"/>
-<meta property="og:description" content="Web-based simulator of Whack-a-Mole (WAM) model to describe the biological effects of radiation exposure">
-<meta property="og:site_name" content="WAM Simulator">
-<meta property="og:image" content="https://wamsim.vdslab.jp/ogp.png">
-<meta name="twitter:card" content="summary_large_image">
-<title>WAM Simulator</title>
-<link rel="stylesheet" href="../node_modules/bulma/css/bulma.min.css">
-<link rel="stylesheet" href="../node_modules/bulma-extensions/dist/css/bulma-extensions.min.css">
-<link rel="apple-touch-icon" sizes="180x180" href="./images/icons/icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"  href="./images/icons/icon-192x192.png">
-<link rel="manifest" href="./manifest.webmanifest">
-<meta name="theme-color" content="#0000ff">
-<style>
-.svg-box {
-  width: 100%;
-  height: 0;
-  position: relative;
-  padding-top: 60%;
-}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="Description"
+      content="Web-based simulator of Whack-a-Mole (WAM) model to describe the biological effects of radiation exposure"
+    />
+    <meta property="og:url" content="https://wamsim.vdslab.jp/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="WAM Simulator" />
+    <meta
+      property="og:description"
+      content="Web-based simulator of Whack-a-Mole (WAM) model to describe the biological effects of radiation exposure"
+    />
+    <meta property="og:site_name" content="WAM Simulator" />
+    <meta property="og:image" content="https://wamsim.vdslab.jp/ogp.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>WAM Simulator</title>
+    <link rel="stylesheet" href="../node_modules/bulma/css/bulma.min.css" />
+    <link
+      rel="stylesheet"
+      href="../node_modules/bulma-extensions/dist/css/bulma-extensions.min.css"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./images/icons/icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="./images/icons/icon-192x192.png"
+    />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="theme-color" content="#0000ff" />
+    <style>
+      .svg-box {
+        width: 100%;
+        height: 0;
+        position: relative;
+        padding-top: 60%;
+      }
 
-.svg-box-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-svg text {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-svg text::selection {
-  background: none;
-}
-#download {
-  display: none;
-}
-</style>
-</head>
-<body>
-  <div>
-    <nav class="navbar is-link">
-      <div class="container">
-        <div class="navbar-brand">
-          <a class="navbar-item">
-            <h1>WAM Simulator</h1>
-          </a>
+      .svg-box-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      svg text {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      svg text::selection {
+        background: none;
+      }
+      #download {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <nav class="navbar is-link">
+        <div class="container">
+          <div class="navbar-brand">
+            <a class="navbar-item">
+              <h1>WAM Simulator</h1>
+            </a>
+          </div>
         </div>
-      </div>
-    </nav>
-    <section class="section">
-      <div class="container">
-        <div id="content"></div>
-      </div>
-    </section>
-    <section class="section">
-      <div class="container">
-        <div class="content">
-          <h1>Whack-A-Mole (WAM) Model Simulator</h1>
-          <p>
-            The simulator solves a following differential equation:
-              $$\frac{F(t)}{dt} = A(t) - B(t) F(t)$$
-            where,
-              $$A(t) = a_0 + a_1 d(t)$$
-              $$B(t) = b_0 + b_1 d(t)$$
-          <p>
-          <table>
-            <thead>
-              <tr>
-                <th>Notation</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>\(t\)</td>
-                <td>Time (hour)</td>
-              </tr>
-              <tr>
-                <td>\(F(t)\)</td>
-                <td>Mutation frequency at \(t\)</td>
-              </tr>
-              <tr>
-                <td>\(A(t)\)</td>
-                <td>Increasing rate of mutation frequency \(t\)</td>
-              </tr>
-              <tr>
-                <td>\(B(t)\)</td>
-                <td>Decreasing rate of mutation frequency \(t\)</td>
-              </tr>
-              <tr>
-                <td>\(a_0\)</td>
-                <td>Increasing rate of mutation occurred in natural environment (1/hour)</td>
-              </tr>
-              <tr>
-                <td>\(a_1\)</td>
-                <td>Increasing rate of mutation correspnding to radiation dose (1/Gy)</td>
-              </tr>
-              <tr>
-                <td>\(b_0\)</td>
-                <td>Decreasing rate occurred in natural environment (1/hour)</td>
-              </tr>
-              <tr>
-                <td>\(b_1\)</td>
-                <td>Decreasing rate caused by radiation (1/Gy)</td>
-              </tr>
-              <tr>
-                <td>\(d(t)\)</td>
-                <td>Dose rate at \(t\) (Gy/hour)</td>
-              </tr>
-            </tbody>
-          </table>
-          <h3>Publications</h3>
-          <ul>
-            <li>Manabe, Y., Ichikawa, K., &amp; Bando, M. (2012). A mathematical model for estimating biological damage caused by radiation. Journal of the Physical Society of Japan, 81(10), 104004.</li>
-            <li>Manabe, Y., &amp; Bando, M. (2013). Comparison of data on mutation frequencies of mice caused by radiation with low dose model. Journal of the Physical Society of Japan, 82(9), 94004.</li>
-            <li>Nakamura, I., Manabe, Y., &amp; Bando, M. (2014). Reaction rate theory of radiation exposure and scaling hypothesis in mutation frequency. Journal of the Physical Society of Japan, 83(11), 114003.</li>
-            <li>Manabe, Y., Wada, T., Tsunoyama, Y., Nakajima, H., Nakamura, I., &amp; Bando, M. (2015). Whack-a-mole model: towards a unified description of biological effects caused by radiation exposure. Journal of the Physical Society of Japan, 84(4), 44002.</li>
-            <li>Wada, T., Manabe, Y., Nakamura, I., Tsunoyama, Y., Nakajima, H., & Bando, M. (2016). Dose and dose-rate dependence of mutation frequency under long-term exposure–a new look at DDREF from WAM model. Journal of Nuclear Science and Technology, 53(11), 1824–1830.</li>
-            <li>Bando, M., Wada, T., &amp; Manabe, Y. (2017). From DDREF to EDR - what the history of LNT indicates. In 4th International Symposium on the System of Radiological Protection, 2nd European Radiological Protection Research Week (p. 57).</li>
-            <li>Tsunoyama, Y., Suzuki, K., Masugi-Tokita, M., Nakajima, H., Manabe, Y., Wada, T., &amp; Bando, M. (2019). Verification of a dose rate-responsive dynamic equilibrium model on radiation-induced mutation frequencies in mice. International Journal of Radiation Biology, (just-accepted), 1–19.</li>
-          </ul>
+      </nav>
+      <section class="section">
+        <div class="container">
+          <div id="content"></div>
         </div>
-      </div>
-    </section>
-    <footer class="footer">
-      <div class="content has-text-centered">
-        <p>powered by WAM Team</p>
-      </div>
-    </footer>
-  </div>
-  <div class="pageloader is-link is-active">
-    <p class="title">WAM Simulator</p>
-  </div>
-  <a id="download" />
-  <script src="./index.js"></script>
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-</body>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="content">
+            <h1>Whack-A-Mole (WAM) Model Simulator</h1>
+            <p>
+              The simulator solves a following differential equation:
+              $$\frac{F(t)}{dt} = A(t) - B(t) F(t)$$ where, $$A(t) = a_0 + a_1
+              d(t)$$ $$B(t) = b_0 + b_1 d(t)$$
+            </p>
+
+            <p></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Notation</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>\(t\)</td>
+                  <td>Time (hour)</td>
+                </tr>
+                <tr>
+                  <td>\(F(t)\)</td>
+                  <td>Mutation frequency at \(t\)</td>
+                </tr>
+                <tr>
+                  <td>\(A(t)\)</td>
+                  <td>Increasing rate of mutation frequency \(t\)</td>
+                </tr>
+                <tr>
+                  <td>\(B(t)\)</td>
+                  <td>Decreasing rate of mutation frequency \(t\)</td>
+                </tr>
+                <tr>
+                  <td>\(a_0\)</td>
+                  <td>
+                    Increasing rate of mutation occurred in natural environment
+                    (1/hour)
+                  </td>
+                </tr>
+                <tr>
+                  <td>\(a_1\)</td>
+                  <td>
+                    Increasing rate of mutation correspnding to radiation dose
+                    (1/Gy)
+                  </td>
+                </tr>
+                <tr>
+                  <td>\(b_0\)</td>
+                  <td>
+                    Decreasing rate occurred in natural environment (1/hour)
+                  </td>
+                </tr>
+                <tr>
+                  <td>\(b_1\)</td>
+                  <td>Decreasing rate caused by radiation (1/Gy)</td>
+                </tr>
+                <tr>
+                  <td>\(d(t)\)</td>
+                  <td>Dose rate at \(t\) (Gy/hour)</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              See
+              <a href="http://radi.rirc.kyoto-u.ac.jp/wam/en/index.html"
+                >http://radi.rirc.kyoto-u.ac.jp/wam/en/index.html</a
+              >
+              for more details.
+            </p>
+            <h3>Publications</h3>
+            <ul>
+              <li>
+                Manabe, Y., Ichikawa, K., &amp; Bando, M. (2012). A mathematical
+                model for estimating biological damage caused by radiation.
+                Journal of the Physical Society of Japan, 81(10), 104004.
+              </li>
+              <li>
+                Manabe, Y., &amp; Bando, M. (2013). Comparison of data on
+                mutation frequencies of mice caused by radiation with low dose
+                model. Journal of the Physical Society of Japan, 82(9), 94004.
+              </li>
+              <li>
+                Nakamura, I., Manabe, Y., &amp; Bando, M. (2014). Reaction rate
+                theory of radiation exposure and scaling hypothesis in mutation
+                frequency. Journal of the Physical Society of Japan, 83(11),
+                114003.
+              </li>
+              <li>
+                Manabe, Y., Wada, T., Tsunoyama, Y., Nakajima, H., Nakamura, I.,
+                &amp; Bando, M. (2015). Whack-a-mole model: towards a unified
+                description of biological effects caused by radiation exposure.
+                Journal of the Physical Society of Japan, 84(4), 44002.
+              </li>
+              <li>
+                Wada, T., Manabe, Y., Nakamura, I., Tsunoyama, Y., Nakajima, H.,
+                & Bando, M. (2016). Dose and dose-rate dependence of mutation
+                frequency under long-term exposure–a new look at DDREF from WAM
+                model. Journal of Nuclear Science and Technology, 53(11),
+                1824–1830.
+              </li>
+              <li>
+                Bando, M., Wada, T., &amp; Manabe, Y. (2017). From DDREF to EDR
+                - what the history of LNT indicates. In 4th International
+                Symposium on the System of Radiological Protection, 2nd European
+                Radiological Protection Research Week (p. 57).
+              </li>
+              <li>
+                Tsunoyama, Y., Suzuki, K., Masugi-Tokita, M., Nakajima, H.,
+                Manabe, Y., Wada, T., &amp; Bando, M. (2019). Verification of a
+                dose rate-responsive dynamic equilibrium model on
+                radiation-induced mutation frequencies in mice. International
+                Journal of Radiation Biology, (just-accepted), 1–19.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <footer class="footer">
+        <div class="content has-text-centered">
+          <p>powered by WAM Team</p>
+        </div>
+      </footer>
+    </div>
+    <div class="pageloader is-link is-active">
+      <p class="title">WAM Simulator</p>
+    </div>
+    <a id="download" />
+    <script src="./index.js"></script>
+    <script
+      type="text/javascript"
+      async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
+    ></script>
+  </body>
 </html>
