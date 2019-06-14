@@ -38,10 +38,10 @@ const updateD = (timeMax, totalDoseMax, doseMax, line) => {
 
   let totalD = 0
   const lineTotal = []
-  lineTotal.push([0, line.line[0][0]])
+  lineTotal.push([0, line.line[0][1]])
   for (let i = 1; i < line.line.length; ++i) {
-    if (d[i] > 0) {
-      totalD += d[i]
+    if (d[i - 1] > 0) {
+      totalD += d[i - 1]
       lineTotal.push([totalD, line.line[i][1]])
     }
   }
@@ -52,11 +52,11 @@ const updateD = (timeMax, totalDoseMax, doseMax, line) => {
     .domain(lineTotal.map((row) => row[0]))
     .range(lineTotal.map((row) => row[1]))
   const steps = 1000
-  line.lineTotal = new Array(steps)
-  line.lineTotal[0] = lineTotal[0]
-  for (let i = 1; i < steps; ++i) {
-    const D = (totalDoseMax / steps) * i
-    line.lineTotal[i] = [D, D > totalD ? null : interpolator(D)]
+  const dStep = totalDoseMax / steps
+  line.lineTotal = []
+  line.lineTotal.push(lineTotal[0])
+  for (let D = dStep; D <= totalDoseMax; D += dStep) {
+    line.lineTotal.push([D, D > totalD ? null : interpolator(D)])
   }
 
   return line
@@ -79,8 +79,8 @@ const initialLineParams = () => {
     a1: 2.94,
     b0: 3.0,
     b1: 1.36,
-    alpha: 2.79,
-    beta: 2.32
+    alpha: 2.8,
+    beta: 1.0
   }
 }
 

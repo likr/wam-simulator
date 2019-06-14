@@ -88,7 +88,7 @@ const MutationFrequencyPanel = (props) => {
               <button
                 className='button is-small is-fullwidth'
                 onClick={() => {
-                  exportDoseCSV(lines, 'hour-mf')
+                  exportDoseCSV(lines, 'dose-mf')
                 }}
               >
                 Save as CSV
